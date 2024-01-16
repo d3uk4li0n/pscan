@@ -8,9 +8,10 @@ def scan(ip, port=80, timeout=10):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(timeout)
     if s.connect_ex((hname, port)):
-        print(f"port: {port} is open")
+        print(f"port: {port} is closed")
     else:
-        print(f"unclear response from port {port}")
+        print("port is open")
+        #print(f"unclear response from port {port}")
     s.close()
 
 def get_domain_name(ip):
