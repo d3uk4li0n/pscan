@@ -1,7 +1,15 @@
 #!/usr/bin/python3
 
+import os
 import socket
 import argparse
+
+def ping_host(ip, count=1):
+    rsp = os.system(f"ping -c {count} {ip}")
+    if rsp == 0:
+        print(f"{ip} is up")
+    else:
+        print(f"{ip} is down")
 
 def scan(ip, port=80, timeout=10):
     hname = get_domain_name(ip)
