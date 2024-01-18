@@ -3,6 +3,17 @@
 import os
 import socket
 import argparse
+from scapy.all import *
+
+## function for syn scan
+## TODO add specify source ip
+def syn_scan(ip, port, timeout=5):
+    pkt = IP(dst=ip)/TCP(dport=port, flags="S")# forged syn packet
+    answer = sr1(pkt, timeout=timeout)
+    if answer.getlayer(TCP).flags == "SA":
+        print(f"port {port} is open")
+    if answer.getlayer(TCP).flags == "R":
+        print(f"port {port} is closed")
 
 def ping_host(ip, count=1):
     rsp = os.system(f"ping -c {count} {ip}")
