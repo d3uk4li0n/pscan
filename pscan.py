@@ -15,6 +15,14 @@ def syn_scan(ip, port, timeout=5):
     if answer.getlayer(TCP).flags == "R":
         print(f"port {port} is closed")
 
+def udp_scan(ip, port, count=1):
+    try:
+        pkt = send(IP(dst=ip)/TCP(dport=port), count=count)
+    except ConnectionResetError:
+        print(f"port {port} closed or filtered")
+        return 
+    print(f"port {port} open")
+
 def ping_host(ip, count=1):
     rsp = os.system(f"ping -c {count} {ip}")
     if rsp == 0:
