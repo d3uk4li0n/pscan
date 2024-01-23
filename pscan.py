@@ -53,6 +53,24 @@ def get_domain_name(ip):
         return ""
 
 if __name__ == "__main__":
+    stype = input(f"{Fore.BLUE}[+] Specify scan type: UDP (U), syn (SS), connect scan(S), ping host(P): ")
+    if(stype == "P"):
+        pcount = int(input(f"{Fore.BLUE}[+] (Optional) specify count (default: 1): "))
+    target = str(input(f"{Fore.BLUE}[+] Target IP: "))
+    port = int(input(f"{Fore.BLUE}[+] Target port: "))
+    timeout = int(input(f"{Fore.BLUE}[+] (Optional) timeout (default: 10): "))
+    if(stype == "U"):
+        udp_scan(target, port, timeout)
+    elif(stype == "SS"):
+        syn_scan(target, port, timeout)
+    elif(stype == "S"):
+        scan(target, port, timeout)
+    elif(stype == "P"):
+        ping_host(target, pcount)
+    else:
+        print(f"{Fore.RED}[-] No option selected, exiting...")
+        exit()
+    '''
     parser = argparse.ArgumentParser(prog="banner grabber", description="Your favorite python port scanner",
                                      epilog="python3 bangrab.py [port] [timeout]")
     parser.add_argument("-t", "--target", help="ip or hostname of the target")
@@ -62,4 +80,5 @@ if __name__ == "__main__":
 
     parser.print_help()
     args = parser.parse_args()
+    '''
     
