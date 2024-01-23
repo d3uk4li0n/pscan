@@ -4,6 +4,7 @@ import os
 import socket
 import argparse
 from scapy.all import *
+from colorama import Fore
 
 ## function for syn scan
 ## TODO add specify source ip
